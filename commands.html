@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS — Commands</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>JARVIS</h1>
+  <p>Every command. If it isn't here, it doesn't exist — ask <span class="cmd">-help</span>.</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="models.html">Models</a>
+  <a href="commands.html" class="on">Commands</a>
+  <a href="setup.html">Setup</a>
+</nav>
+<main>
+  <h2>Talking to Jarvis</h2>
+  <table>
+    <tr><th>Command</th><th>What</th></tr>
+    <tr><td><span class="cmd">-jarvis &lt;question&gt;</span></td><td>Full-power answer. 1 credit. Images + documents OK.</td></tr>
+    <tr><td><span class="cmd">-jarvisfollowup &lt;more&gt;</span></td><td>Continue the thread. 0.5 credit.</td></tr>
+    <tr><td><span class="cmd">-jarvislimit</span></td><td>Credits left today.</td></tr>
+    <tr><td><span class="cmd">-jarvishelp</span></td><td>What Jarvis can do, in chat.</td></tr>
+    <tr><td><span class="cmd">/jarvis</span></td><td>Slash twin, works anywhere including DMs.</td></tr>
+    <tr><td><span class="cmd">@Jarvis ...</span> / <span class="cmd">hey jarvis ...</span></td><td>No command needed — ping or name both work.</td></tr>
+  </table>
+
+  <h2>Bug desk</h2>
+  <table>
+    <tr><th>Command</th><th>What</th></tr>
+    <tr><td><span class="cmd">-bug &lt;what broke + expected&gt;</span></td><td>Files a numbered ticket; Jarvis investigates with source immediately.</td></tr>
+    <tr><td><span class="cmd">-bugs</span></td><td>Ticket board with statuses.</td></tr>
+    <tr><td><span class="cmd">-bug investigate #N</span></td><td>Fresh deep-dive (Primaries).</td></tr>
+    <tr><td><span class="cmd">-bug claim #N</span></td><td>Take ownership (Primaries).</td></tr>
+    <tr><td><span class="cmd">-bug approve #N</span></td><td>Authorize the proposed fix (Primaries).</td></tr>
+    <tr><td><span class="cmd">-bug close #N [note]</span></td><td>Close it (Primaries).</td></tr>
+    <tr><td><span class="cmd">-tickets</span></td><td>Raw auto-triage inbox for server staff.</td></tr>
+  </table>
+
+  <h2>Power words (owner/managers, no prefix)</h2>
+  <table>
+    <tr><th>Words</th><th>Effect</th></tr>
+    <tr><td><span class="cmd">shhh</span> / sush / shut it / zip it / close / stand down</td><td>Full quiet. Only your own call breaks through.</td></tr>
+    <tr><td><span class="cmd">wake up</span> / come back (as power word)</td><td>Re-arm + 20 min everyone-answers mode.</td></tr>
+    <tr><td><span class="cmd">leave the market</span> / leave #channel</td><td>Exits one channel until <span class="cmd">come back</span>.</td></tr>
+    <tr><td><span class="cmd">shut down the bot</span> → <span class="cmd">confirm shutdown</span></td><td>Two-step full stop (Primaries only).</td></tr>
+  </table>
+
+  <h2>Server setup</h2>
+  <table>
+    <tr><th>Command</th><th>What</th></tr>
+    <tr><td><span class="cmd">-setup jarvis</span></td><td>Status: pings, triage, community, awake, sleep, muted channels.</td></tr>
+    <tr><td><span class="cmd">-setup jarvis &lt;on|off&gt;</span></td><td>Master switch for auto-replies here.</td></tr>
+    <tr><td><span class="cmd">-setup jarvis mentions &lt;on|off&gt;</span></td><td>Ping/name answers.</td></tr>
+    <tr><td><span class="cmd">-setup jarvis bugs &lt;on|off&gt;</span></td><td>Bug triage + inbox.</td></tr>
+    <tr><td><span class="cmd">-setup jarvis community &lt;on|off&gt;</span></td><td>Everyone-talks mode (default: staff-only).</td></tr>
+    <tr><td><span class="cmd">-jarvislore</span> / <span class="cmd">-lorescan</span></td><td>Indexed history coverage / force rescan (owner).</td></tr>
+  </table>
+
+  <h2>Bot commands Jarvis can explain</h2>
+  <p class="kicker">Economy: -work -collect -build -balance -bank -loan -credit -pay -market -trade -stocks -company -hire -fire -resign · World/state: -worldstatus -nations -diplomacy -research -map -decree · Play: -slots -dice -lottery -auction -pet -houses -crime · Votes: -election -vote -budgetvote -setpct -fixvoting · Penal: -gulag -extractprofit · Server: -setup -serverhelp -econgraph -worldeconomy -localelection -currencies</p>
+</main>
+<footer>JARVIS docs · free forever · 5/day</footer>
+</body>
+</html>

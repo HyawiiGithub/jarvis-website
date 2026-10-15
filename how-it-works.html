@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS — How it works</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>JARVIS</h1>
+  <p>How it works, end to end</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html" class="on">How it works</a>
+  <a href="models.html">Models</a>
+  <a href="commands.html">Commands</a>
+  <a href="setup.html">Setup</a>
+</nav>
+<main>
+  <h2>1. Hearing you</h2>
+  <p>Jarvis listens to plain chat — no prefix needed for most things:</p>
+  <table>
+    <tr><th>You type</th><th>What happens</th></tr>
+    <tr><td><span class="cmd">@Jarvis how do I join a company</span></td><td>Full answer (1 daily credit).</td></tr>
+    <tr><td><span class="cmd">hey jarvis why is collect broken</span></td><td>Same as a ping — its name is the address.</td></tr>
+    <tr><td><span class="cmd">jarvis</span> / <span class="cmd">come jarvis</span></td><td>Free nudge: it asks what you need.</td></tr>
+    <tr><td><span class="cmd">collect is broken pls</span> (no name)</td><td>Bug triage in support channels or with a plea word — fix if known, logged to the ticket inbox.</td></tr>
+    <tr><td><span class="cmd">-jarvis &lt;question&gt;</span></td><td>Explicit command, full power: live state, lore, web search, images, documents.</td></tr>
+    <tr><td><span class="cmd">/jarvis</span></td><td>Slash twin, works in any server.</td></tr>
+  </table>
+
+  <h2>2. Building context</h2>
+  <p>Every answer is assembled from live evidence, in this order:</p>
+  <div class="card"><p><b>Server scope</b> — this server's currency, settings, live local race. Other servers are invisible and it says so.<br>
+  <b>Economy snapshot</b> — exact GDP, GSI, inflation, gold backing.<br>
+  <b>Roles</b> — your Discord roles plus anyone you @mention, resolved live. Ranks come from here, never guessed.<br>
+  <b>Server lore</b> — past channel history for who/what/when questions.<br>
+  <b>Source code</b> — for code and bug questions it searches every bot source file (phrases first, then definitions, then mentions) and quotes file:line.<br>
+  <b>Dossiers</b> — Primary-written facts about people, highest authority when present.</p></div>
+
+  <h2>3. Answering</h2>
+  <p>A provider from the <a href="models.html">model chain</a> writes the reply in plain Discord text. Bad output (safety templates, parroting, stutter) is detected and the next model tries instead — trash never reaches chat. Long answers are chunked so limits cut between messages, never mid-thought.</p>
+
+  <h2>4. Autonomy</h2>
+  <table>
+    <tr><th>State</th><th>Meaning</th></tr>
+    <tr><td>Quiet (default)</td><td>Auto-talk is staff-only. Everyone else uses <span class="cmd">-jarvis</span>.</td></tr>
+    <tr><td>Awake (~20 min)</td><td>Owner's call wakes the server — Jarvis answers everyone in all channels, then stands down alone.</td></tr>
+    <tr><td>Asleep (<span class="cmd">shhh</span>)</td><td>No unsolicited replies anywhere. Only the owner's own call breaks through (and re-wakes).</td></tr>
+    <tr><td>Left channel</td><td><span class="cmd">leave the market</span> exits one channel until <span class="cmd">come back</span>.</td></tr>
+    <tr><td>Community</td><td><span class="cmd">-setup jarvis community on</span> restores everyone-talks mode per server.</td></tr>
+  </table>
+
+  <h2>5. Bug desk loop</h2>
+  <pre>member:  -bug collect gave nothing, expected grain
+jarvis:  Ticket #12 filed — investigating…
+jarvis:  cause + bot.js:line + exact fix (proposes only)
+owner:   -bug approve #12   → authorized, agent applies it
+owner:   -bug close #12     → done, logged in ticket history</pre>
+  <p>The bot proposes fixes and stops for authorization. It cannot edit files and never claims otherwise.</p>
+
+  <h2>6. Limits</h2>
+  <table>
+    <tr><th>Limit</th><th>Value</th></tr>
+    <tr><td>Daily pool</td><td>5 answers/user, follow-ups 0.5. Refills daily, free.</td></tr>
+    <tr><td>Cooldowns</td><td>30s per channel + per user.</td></tr>
+    <tr><td>Hourly cap</td><td>30/server (60 while awake).</td></tr>
+    <tr><td>Concurrency</td><td>3 AI calls at once; extras drop silently.</td></tr>
+    <tr><td>Bypass</td><td>Owners and managers skip lines and pools.</td></tr>
+  </table>
+</main>
+<footer>JARVIS docs · free forever · 5/day</footer>
+</body>
+</html>

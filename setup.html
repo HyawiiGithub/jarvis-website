@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS — Setup &amp; troubleshooting</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>JARVIS</h1>
+  <p>Setup &amp; troubleshooting</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="models.html">Models</a>
+  <a href="commands.html">Commands</a>
+  <a href="setup.html" class="on">Setup</a>
+</nav>
+<main>
+  <h2>API keys (.env)</h2>
+  <table>
+    <tr><th>Key</th><th>What</th></tr>
+    <tr><td><span class="cmd">OPENCODE_API_KEY</span> or <span class="cmd">OPENROUTER_API_KEY</span></td><td>Required — at least one. This is where any spend goes.</td></tr>
+    <tr><td><span class="cmd">JARVIS_MODEL</span></td><td>Optional override (default: gemma-4-31b-it:free).</td></tr>
+    <tr><td><span class="cmd">JARVIS_FALLBACK_MODELS</span></td><td>Comma list, tried right after the default.</td></tr>
+    <tr><td><span class="cmd">GROQ_API_KEY</span> / <span class="cmd">GROQ_MODELS</span></td><td>Free fast fallback (recommended second key).</td></tr>
+    <tr><td><span class="cmd">GEMINI_API_KEY</span> / <span class="cmd">GEMINI_MODELS</span></td><td>Optional third fallback.</td></tr>
+    <tr><td><span class="cmd">OLLAMA_BASE_URL</span> / <span class="cmd">OLLAMA_MODELS</span> / <span class="cmd">OLLAMA_FIRST</span></td><td>Self-hosted. Private, unlimited after hardware.</td></tr>
+  </table>
+
+  <h2>Running the bot</h2>
+  <pre>npm i -g pm2
+pm2 start ecosystem.config.js   # or: pm2 start bot.js --name ussr-eco
+pm2 save && pm2 startup
+pm2 logs ussr-eco --lines 30    # watch boot + Jarvis errors
+pm2 restart ussr-eco            # after copying new bot.js / economy_core.js</pre>
+  <p class="kicker">Always deploy <span class="cmd">bot.js</span> + <span class="cmd">economy_core.js</span> together — the bot refuses to boot on a mismatched pair. Never overwrite the server's <span class="cmd">.env</span>.</p>
+
+  <h2>Per-server toggles</h2>
+  <pre>-setup jarvis                 # status line
+-setup jarvis community on    # everyone-talks mode
+-setup jarvis bugs off        # silence triage here
+-setup jarvis off             # auto-replies off entirely</pre>
+
+  <h2>"Came back empty" — what it means</h2>
+  <table>
+    <tr><th>Message</th><th>Cause / fix</th></tr>
+    <tr><td>no AI key in the server .env</td><td>No provider key set. Add one, restart.</td></tr>
+    <tr><td>API key rejected (401)</td><td>Key wrong or revoked. Replace it.</td></tr>
+    <tr><td>out of credits (402)</td><td>Provider balance dry. Top up or wait.</td></tr>
+    <tr><td>model gone (… 404)</td><td>Slug retired. Update the chain / set JARVIS_MODEL.</td></tr>
+    <tr><td>rate-limited (429)</td><td>Free quota spent. Wait, top up, or add Groq.</td></tr>
+    <tr><td>network/timeout</td><td>Droplet can't reach the provider. Check network/DNS.</td></tr>
+  </table>
+  <p class="kicker">Full detail lands in logs as <span class="cmd">[jarvis-auto]</span> with provider, model, code.</p>
+
+  <h2>Silence checklist</h2>
+  <div class="card"><p>Nothing answers at all? Check in order: 1) files deployed + restarted, 2) <span class="cmd">pm2 logs</span> for boot errors, 3) <span class="cmd">-botstatus</span> (bot alive?), 4) <span class="cmd">-jarvislimit</span> (pool dry?), 5) <span class="cmd">-setup jarvis</span> (asleep? muted channel? community off + you're not staff?). A ⏳ reaction means cooldown — wait 30s.</p></div>
+</main>
+<footer>JARVIS docs · free forever · 5/day</footer>
+</body>
+</html>

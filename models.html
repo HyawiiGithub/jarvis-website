@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS — Models &amp; providers</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>JARVIS</h1>
+  <p>Models &amp; providers — the real chain, in order</p>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html">How it works</a>
+  <a href="models.html" class="on">Models</a>
+  <a href="commands.html">Commands</a>
+  <a href="setup.html">Setup</a>
+</nav>
+<main>
+  <h2>How the chain works</h2>
+  <p>Jarvis tries providers top to bottom with retries spaced against rate limits. First real answer wins. Dead model slugs are retired to a blocklist so a removed model never stalls the chain again. Free models keep it at $0; paid fallbacks exist if keys are set.</p>
+
+  <h2>OpenRouter (primary)</h2>
+  <table>
+    <tr><th>#</th><th>Model</th><th>Role</th></tr>
+    <tr><td>1</td><td><span class="cmd">google/gemma-4-31b-it:free</span></td><td>Default. Dense 30B instruct model, solid chat + reasoning. Overridable.</td></tr>
+    <tr><td>2</td><td><span class="cmd">nvidia/nemotron-3.5-super-vl:free</span></td><td>Main backup. 1M context, takes images/documents — best fallback for picture questions.</td></tr>
+    <tr><td>3</td><td><span class="cmd">qwen/qwen3.8-27b:free</span></td><td>Backup. Multilingual, strong instruction following.</td></tr>
+    <tr><td>4</td><td><span class="cmd">thinkingmachines/inkling-small:free</span></td><td>Backup. Small efficient reasoner, 1M context.</td></tr>
+    <tr><td>5</td><td><span class="cmd">google/gemma-4-26b-a4b-it:free</span></td><td>Backup. MoE, near-31B quality at low compute.</td></tr>
+    <tr><td>6</td><td><span class="cmd">nvidia/nemotron-3.5-lightning:free</span></td><td>Backup. Fast mid-size model.</td></tr>
+    <tr><td>7</td><td><span class="cmd">openrouter/free</span></td><td>Last resort router — OpenRouter picks any working free model.</td></tr>
+  </table>
+  <p class="kicker">Your own picks via <span class="cmd">JARVIS_FALLBACK_MODELS</span> slot in right after #1.</p>
+
+  <h2>Fallback providers</h2>
+  <table>
+    <tr><th>Provider</th><th>Models</th><th>Notes</th></tr>
+    <tr><td>Groq</td><td><span class="cmd">openai/gpt-oss-120b</span>, <span class="cmd">qwen/qwen3.6-27b</span>, <span class="cmd">openai/gpt-oss-20b</span></td><td>Needs <span class="cmd">GROQ_API_KEY</span> (free tier, no card). Very fast.</td></tr>
+    <tr><td>Gemini</td><td><span class="cmd">gemini-2.5-flash</span></td><td>Needs <span class="cmd">GEMINI_API_KEY</span>.</td></tr>
+    <tr><td>Ollama</td><td>Yours (default <span class="cmd">llama3.1</span>)</td><td>Self-hosted via <span class="cmd">OLLAMA_BASE_URL</span>. Private, unlimited. <span class="cmd">OLLAMA_FIRST=true</span> prefers it.</td></tr>
+  </table>
+
+  <h2>Retired slugs</h2>
+  <p>Models die constantly on free tiers. These are blocklisted so the chain skips them instantly instead of burning a 404 each: nex-agi/n2.5-pro, gpt-oss-20b:free, muse-spark-zen, llama-3.3-70b-versatile, llama-3.1-8b-instant, llama-3.3-70b-instruct:free, qwen3-coder:free. Set <span class="cmd">JARVIS_MODEL</span> to pin anything else.</p>
+
+  <h2>Free-tier reality</h2>
+  <div class="card"><p>Free models are free per token but rate-limited — typically ~50 requests/day shared across everyone on a keyless-tier key. That shared cap, not the bot, is what goes quiet first on busy days. Owner keys, Groq, or self-hosted Ollama lift it.</p></div>
+</main>
+<footer>JARVIS docs · free forever · 5/day</footer>
+</body>
+</html>
